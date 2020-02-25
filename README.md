@@ -1,6 +1,8 @@
 Packagist-Light
 ===============
+
 This project will be a light version of packagist and is intended for smaller organizations that manage only a few packages of their own.
+
 DIRECTORY STRUCTURE
 -------------------
 
