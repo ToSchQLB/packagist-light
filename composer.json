@@ -2,7 +2,6 @@
     "name": "toschqlb/packagist-light",
     "description": "Packagist Light",
     "keywords": ["composer", "packagist"],
-    "homepage": "",
     "type": "project",
     "license": "mpl-2.0",
     "minimum-stability": "stable",
