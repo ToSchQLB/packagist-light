@@ -17,15 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
+    <?= $form->field($model, 'git_source_id') ?>
+
     <?= $form->field($model, 'private') ?>
 
     <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'url') ?>
-
-    <?= $form->field($model, 'route') ?>
-
-    <?php // echo $form->field($model, 'repo_user') ?>
+    <?= $form->field($model, 'repo_user') ?>
 
     <?php // echo $form->field($model, 'repo_name') ?>
 

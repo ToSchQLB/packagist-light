@@ -12,13 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'git_source_id')->textInput() ?>
+
     <?= $form->field($model, 'private')->textInput() ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'route')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'repo_user')->textInput(['maxlength' => true]) ?>
 

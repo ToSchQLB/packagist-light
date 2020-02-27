@@ -1,4 +1,4 @@
- <?php
+<?php
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -30,61 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            'git_source_id',
             'private',
             'name',
-            'url:url',
-            'route',
             'repo_user',
             'repo_name',
         ],
     ]) ?>
-
-    <?php
-
-
-    $url = $model->url . 'api/v1/repos/' . $model->route . '/releases';
-
-    echo $url;
-
-    $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_NOPROXY, 'localhost');
-
-    $output = curl_exec($ch);
-
-    curl_close($ch);
-
-    $releases = json_decode($output, true);
-
-    foreach ($releases as $release) {
-        echo "<h3>{$release['name']}</h3>";
-        echo "{$release['zipball_url']}<br>";
-
-        $ch = curl_init();
-
-        //$releaseUrl = $url . '/' . $release['id'];
-        $composerUrl = "{$model->url}/api/v1/repos/{$model->route}/contents/composer.json?ref={$release['tag_name']}";
-
-        echo $composerUrl;
-
-        curl_setopt($ch, CURLOPT_URL, $composerUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_NOPROXY, 'localhost');
-
-        $output = curl_exec($ch);
-
-        curl_close($ch);
-
-        $data = json_decode($output, true);
-
-        echo '<pre>';
-        echo base64_decode($data['content']);
-        echo '</pre>';
-    }
-
-
-    ?>
 
 </div>

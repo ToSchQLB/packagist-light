@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Package;
+use app\models\GitSource;
 
 /**
- * PackageSearch represents the model behind the search form of `app\models\Package`.
+ * GitSourceSearch represents the model behind the search form of `app\models\GitSource`.
  */
-class PackageSearch extends Package
+class GitSourceSearch extends GitSource
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class PackageSearch extends Package
     public function rules()
     {
         return [
-            [['id', 'git_source_id', 'private'], 'integer'],
-            [['name', 'repo_user', 'repo_name'], 'safe'],
+            [['id'], 'integer'],
+            [['name', 'baseUrl'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class PackageSearch extends Package
      */
     public function search($params)
     {
-        $query = Package::find();
+        $query = GitSource::find();
 
         // add conditions that should always apply here
 
@@ -59,13 +59,10 @@ class PackageSearch extends Package
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'git_source_id' => $this->git_source_id,
-            'private' => $this->private,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'repo_user', $this->repo_user])
-            ->andFilterWhere(['like', 'repo_name', $this->repo_name]);
+            ->andFilterWhere(['like', 'baseUrl', $this->baseUrl]);
 
         return $dataProvider;
     }

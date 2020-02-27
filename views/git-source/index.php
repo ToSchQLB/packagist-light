@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\PackageSearch */
+/* @var $searchModel app\models\GitSourceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('package', 'Packages');
+$this->title = Yii::t('git-source', 'Git Sources');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="package-index">
+<div class="git-source-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('package', 'Create Package'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('git-source', 'Create Git Source'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,11 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'git_source_id',
-            'private',
             'name',
-            'repo_user',
-            //'repo_name',
+            'baseUrl',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
