@@ -15,6 +15,7 @@ use Yii;
  * @property string|null $body
  * @property string|null $zip_url
  * @property string|null $source_composer_json
+ * @property string|null $packagist_json
  *
  * @property Package $package
  */
@@ -35,7 +36,7 @@ class PackageRelease extends \yii\db\ActiveRecord
     {
         return [
             [['package_id'], 'integer'],
-            [['body', 'source_composer_json'], 'string'],
+            [['body', 'source_composer_json', 'packagist_json'], 'string'],
             [['release_id'], 'string', 'max' => 50],
             [['version'], 'string', 'max' => 20],
             [['title'], 'string', 'max' => 255],

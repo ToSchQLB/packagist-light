@@ -38,4 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <h2><?= Yii::t('package','Releases') ?></h2>
+
+    <?= Html::ul(\yii\helpers\ArrayHelper::getColumn($model->releases,'version')) ?>
 </div>

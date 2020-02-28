@@ -13,6 +13,8 @@ use Yii;
  */
 class GitSource extends \yii\db\ActiveRecord
 {
+    use SelectableTrait;
+
     /**
      * {@inheritdoc}
      */
