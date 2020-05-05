@@ -29,9 +29,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'git_source_id',
-            'private',
+            // 'id',
+            'gitSource.name',
+            [
+                'label'=>'Private',
+                'format'=>'html',
+                'value'=>function($model){
+                    if($model->private==0)
+                    {
+                        return "<span class='glyphicon glyphicon-eye-open text-success'></span>";
+                    }else{                  
+                        return "<span class='glyphicon glyphicon-ban-circle text-danger'></span>";
+                    };
+                }
+            ],
+            // 'private',
             'name',
             'repo_user',
             'repo_name',

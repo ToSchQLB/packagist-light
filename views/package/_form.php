@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use kartik\widgets\SwitchInput;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Package */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,15 +14,26 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'git_source_id')->textInput() ?>
+    <?php //echo $form->field($model, 'git_source_id')->textInput() ?>
 
-    <?= $form->field($model, 'private')->textInput() ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true,'label'=>yii::t('packages','name')]) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+<div class='row'>
+    <div class='col-md-6'>
+    <?= $form->field($model, 'repo_user')->textInput(['maxlength' => true,'label'=>yii::t('packages','repo_user')]) ?>
+        </div>
 
-    <?= $form->field($model, 'repo_user')->textInput(['maxlength' => true]) ?>
+    <div class='col-md-6'>
+    <?= $form->field($model, 'repo_name')->textInput(['maxlength' => true,'label'=>yii::t('packages','repo_name')]) ?>
+        </div>
+</div>
 
-    <?= $form->field($model, 'repo_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'private')->widget(SwitchInput::class,[
+        'pluginOptions'=>[
+            'onText' => yii::t('app','yes'),
+            'offText'=> yii::t('app','no'),
+        ]
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('package', 'Save'), ['class' => 'btn btn-success']) ?>

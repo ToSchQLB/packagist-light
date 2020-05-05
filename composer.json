@@ -11,7 +11,8 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "yiisoft/yii2-queue": "^2.3",
-        "toschqlb/yii2-admin-lte-menu": "^1.0"
+        "toschqlb/yii2-admin-lte-menu": "^1.0",
+        "toschqlb/yii2-box-widget": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -64,7 +65,7 @@
         },
         {
             "type": "composer",
-            "url": "http://localhost/packagist-light/web/"
+            "url": "http://packagist.julius-kuehn.de"
         }
     ]
 }

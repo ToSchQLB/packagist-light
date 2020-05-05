@@ -11,6 +11,7 @@ use app\models\Package;
  */
 class PackageSearch extends Package
 {
+    public $git_source;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +19,7 @@ class PackageSearch extends Package
     {
         return [
             [['id', 'git_source_id', 'private'], 'integer'],
-            [['name', 'repo_user', 'repo_name'], 'safe'],
+            [['name', 'repo_user', 'repo_name','git_source'], 'safe'],
         ];
     }
 
@@ -59,13 +60,16 @@ class PackageSearch extends Package
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'git_source_id' => $this->git_source_id,
+            'git_source_id' => $this->git_source,
+            // 'git_source_id' => $this->git_source,
             'private' => $this->private,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'repo_user', $this->repo_user])
+            ->andFilterWhere(['like', 'git_source_id', $this->git_source])
             ->andFilterWhere(['like', 'repo_name', $this->repo_name]);
+
 
         return $dataProvider;
     }

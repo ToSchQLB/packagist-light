@@ -11,6 +11,7 @@ use app\models\GitSource;
  */
 class GitSourceSearch extends GitSource
 {
+    
     /**
      * {@inheritdoc}
      */
