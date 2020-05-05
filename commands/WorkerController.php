@@ -11,7 +11,8 @@ use yii\helpers\ArrayHelper;
 
 class WorkerController extends Controller
 {
-    public function actionUpdatePackages(){
+    public function actionUpdatePackages()
+    {
         $packages = Package::find()->joinWith('releases')->all();
 
         foreach ($packages as $package) {
@@ -60,7 +61,13 @@ class WorkerController extends Controller
         $releasesUrl = $apiBaseUrl . $package->repo_user . '/' . $package->repo_name . '/releases';
         $contentUrl  = $apiBaseUrl . $package->repo_user . '/' . $package->repo_name . '/contents/composer.json?ref=';
 
-        $releases = json_decode( static::curl($releasesUrl), true);
+        $json     = static::curl($releasesUrl);
+        $releases = json_decode($json, true);
+
+        var_dump($releases);
+        var_dump($package->name);
+
+//        die();
 
         foreach ($releases as $release) {
             if (!in_array($release['id'], array_keys($savedReleases) ?? [])) {
@@ -91,7 +98,7 @@ class WorkerController extends Controller
             }
         }
     }
-    
+
     /**
      * @param string $releasesUrl
      *
@@ -101,15 +108,21 @@ class WorkerController extends Controller
     {
         $ch = curl_init();
 
+//        var_dump($releasesUrl);
+
         curl_setopt($ch, CURLOPT_URL, $releasesUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_NOPROXY, 'localhost');
+        foreach (\Yii::$app->params['proxy'] as $option => $value) {
+            curl_setopt($ch, $option, $value);
+        }
 
         $output = curl_exec($ch);
 
+//        var_dump($output);
+
         curl_close($ch);
 
-        return $output;
+        return $output !== false ? $output : '[]';
     }
 
     /**
