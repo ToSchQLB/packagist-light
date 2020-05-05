@@ -37,3 +37,4 @@ web/assets
 
 config/db.php
 config/test_db.php
+config/proxy.php
