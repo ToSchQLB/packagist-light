@@ -44,7 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             // 'private',
-            'name',
+            [
+                    'attribute' => 'name',
+                    'format' => 'raw',
+                    'value' => Html::a($model->name, $model->gitSource->baseUrl . '/' . $model->repo_user . '/' . $model->repo_name)
+            ],
             'repo_user',
             'repo_name',
         ],
