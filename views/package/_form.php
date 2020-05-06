@@ -14,7 +14,7 @@ use kartik\widgets\SwitchInput;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php //echo $form->field($model, 'git_source_id')->textInput() ?>
+    <?php echo $form->field($model, 'git_source_id')->dropDownList(\app\models\GitSource::all()) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true,'label'=>yii::t('packages','name')]) ?>
 

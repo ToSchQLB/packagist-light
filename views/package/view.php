@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             // 'id',
-            'gitSource.name',
+            'gitSource.name:text:Quelle',
             [
                 'label'=>'Private',
                 'format'=>'html',

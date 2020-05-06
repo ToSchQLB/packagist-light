@@ -51,19 +51,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 
             ],
             // 'private',
-            [
-                'attribute'=>'private',
-                'format'=>'raw',
-                'value'=>function($model){
-                    if($model->private==0)
-                    {
-                        return "<span class='glyphicon glyphicon-eye-open text-success'></span>";
-                    }else{                  
-                        return "<span class='glyphicon glyphicon-ban-circle text-danger'></span>";
-                    };
-                },
-                'filter'=>['0'=>yii::t('app','no'),'1'=>yii::t('app','yes')],
-            ],
+//            [
+//                'attribute'=>'private',
+//                'format'=>'raw',
+//                'value'=>function($model){
+//                    if($model->private==0)
+//                    {
+//                        return "<span class='glyphicon glyphicon-eye-open text-success'></span>";
+//                    }else{
+//                        return "<span class='glyphicon glyphicon-ban-circle text-danger'></span>";
+//                    };
+//                },
+//                'filter'=>['0'=>yii::t('app','no'),'1'=>yii::t('app','yes')],
+//            ],
             'repo_name',
             
             'repo_user',
