@@ -60,6 +60,7 @@ class WorkerController extends Controller
 
         $releasesUrl = $apiBaseUrl . $package->repo_user . '/' . $package->repo_name . '/releases';
         $contentUrl  = $apiBaseUrl . $package->repo_user . '/' . $package->repo_name . '/contents/composer.json?ref=';
+        $readmeUrl = !empty($package->readme_file) ? $apiBaseUrl . $package->repo_user . '/' . $package->repo_name . '/contents/'. $package->readme_file .'?ref=' : null;
 
         $json     = static::curl($releasesUrl);
         $releases = json_decode($json, true);
@@ -69,7 +70,7 @@ class WorkerController extends Controller
 
 //        die();
 
-        foreach ($releases as $release) {
+        foreach ($releases as $releaseCnt => $release) {
             if (!in_array($release['id'], array_keys($savedReleases) ?? [])) {
                 $newRelease                       = new PackageRelease();
                 $newRelease->package_id           = $package->id;
@@ -78,7 +79,11 @@ class WorkerController extends Controller
                 $newRelease->version              = $release['tag_name'];
                 $newRelease->body                 = $release['body'];
                 $newRelease->zip_url              = $release['zipball_url'];
-                $newRelease->source_composer_json = static::getComposerFile($contentUrl . $release['tag_name']);
+                $newRelease->source_composer_json = static::getFileFromRepo($contentUrl . $release['tag_name']);
+                if($releaseCnt == 0 && !is_null($readmeUrl)) {
+                    $package->readme = static::getFileFromRepo($readmeUrl . $release['tag_name']);
+                    $package->save();
+                }
 
                 $composerJson            = json_decode($newRelease->source_composer_json, true);
                 $composerJson['version'] = $newRelease->version;
@@ -126,15 +131,15 @@ class WorkerController extends Controller
     }
 
     /**
-     * @param $composerUrl
+     * @param $fileUrl
      *
      * @return string
      */
-    private static function getComposerFile($composerUrl): string
+    private static function getFileFromRepo($fileUrl): string
     {
-        $output = static::curl($composerUrl);
+        $output = static::curl($fileUrl);
         $data   = json_decode($output, true);
 
-        return base64_decode($data['content']);
+        return base64_decode($data['content'] ?? '==');
     }
 }

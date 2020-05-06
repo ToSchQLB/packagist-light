@@ -54,6 +54,20 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">ReadMe</h3>
+        </div>
+        <div class="panel-body">
+            <?php
+            $parser = new \cebe\markdown\GithubMarkdown();
+            echo $parser->parse($model->readme);
+            ?>
+        </div>
+    </div>
+
+
+
     <h2><?= Yii::t('package','Releases') ?></h2>
 
     <?= Html::ul(\yii\helpers\ArrayHelper::getColumn($model->releases,'version')) ?>
