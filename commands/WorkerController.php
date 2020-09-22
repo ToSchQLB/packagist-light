@@ -31,7 +31,7 @@ class WorkerController extends Controller
             $releasList = [];
             foreach ($package->releases as $release) {
                 $releasList[$release->version] = json_decode($release->packagist_json, true);
-                var_dump($releasList[$release->version]);
+                //var_dump($releasList[$release->version]);
             }
             $result['packages'][$package->name] = $releasList;
         }
@@ -64,9 +64,12 @@ class WorkerController extends Controller
 
         $json     = static::curl($releasesUrl);
         $releases = json_decode($json, true);
+        if(!is_array($releases)){
+            $releases = [];
+        }
 
-        var_dump($releases);
-        var_dump($package->name);
+//        var_dump($releases);
+//        var_dump($package->name);
 
 //        die();
 
