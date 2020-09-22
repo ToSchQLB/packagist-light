@@ -35,6 +35,8 @@ use kartik\widgets\SwitchInput;
         ]
     ]) ?>
 
+    <?= $form->field($model,'readme_file') ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('package', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
