@@ -2,52 +2,38 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'JKI Packagist';
 ?>
 <div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Glückwunsch!</h1>
+    <h1>Packagist nutzen <small>ganz einfach und schnell</small></h1>
+    <div class="row">
+        <div class="col-md-5">
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+            <p>
+                öffne die composer.json in deinem Projekt und füge unter Repositories einfach diesen Eintrag hinzu:
+            </p>
+            <code lang="json">
+                { <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"type": "composer",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"url": "https://packagist.julius-kuehn.de"<br>
+                }
+            </code>
+            <br><br>
+            <p>
+                Fertig,<br>
+                jetzt kannst du ganz normal mit den composer Befehlen alle Pakete dieser Seite nutzen
+            </p>
+            <br>
+            <div class="alert alert-warning">
+                Nicht vergessen die Einträge mit Komma zutrennen,<br>
+                <b>ABER kein Komma hinter den letzten Eintrag setzen!</b>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
         </div>
-
+        <div class="col-md-7">
+            <?= \yii\helpers\Html::img('images/composer-json.png') ?>
+        </div>
     </div>
+
 </div>
