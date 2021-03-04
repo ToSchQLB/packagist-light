@@ -38,3 +38,4 @@ web/assets
 config/db.php
 config/test_db.php
 config/proxy.php
+config/ladp-domains.php

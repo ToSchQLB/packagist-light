@@ -2,12 +2,13 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$ldapDomains = require __DIR__ . '/ladp-domains.php';
 
 $config = [
     'id' => 'basic',
+    'name' => 'JKI Packagist',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'queue'],
-    'defaultRoute' => 'package',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -20,10 +21,10 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-        ],
+//        'user' => [
+//            'identityClass' => 'app\models\User',
+//            'enableAutoLogin' => true,
+//        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -32,7 +33,7 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -65,6 +66,15 @@ $config = [
             'channel' => 'default', // Queue channel key
             'mutex' => \yii\mutex\MysqlMutex::class, // Mutex used to sync queries
         ],
+        'view'         => [
+            'theme' => [
+                'pathMap' => \jki\user\ModuleRegister::themePathMap(),
+            ],
+        ],
+        'ldap'         => [
+            'class'   => 'commifreak\yii2\LdapAuth',
+            'domains' => $ldapDomains,
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -73,6 +83,10 @@ $config = [
             ],
         ],
         */
+    ],
+    'modules'    => [
+        'user'          => \jki\user\ModuleRegister::config([
+        ]),
     ],
     'params' => $params,
 ];
@@ -83,7 +97,7 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';

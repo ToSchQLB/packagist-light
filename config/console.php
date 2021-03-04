@@ -53,7 +53,21 @@ $config = [
         'fixture' => [ // Fixture generation command line.
             'class' => 'yii\faker\FixtureController',
         ],
+        'migrate' => [
+            'class'               => \yii\console\controllers\MigrateController::class,
+            'migrationPath'       => [
+                '@app/migrations',
+                '@yii/rbac/migrations', // Just in case you forgot to run it on console (see next note)
+            ],
+            'migrationNamespaces' => [
+                'Da\User\Migration',
+                'jki\user\migrations',
+            ],
+        ],
     ],
+    'modules'    => [
+        'user'          => \jki\user\ModuleRegister::config(),
+    ]
 
 ];
 

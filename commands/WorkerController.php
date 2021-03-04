@@ -74,7 +74,7 @@ class WorkerController extends Controller
 //        die();
 
         foreach ($releases as $releaseCnt => $release) {
-            if (!in_array($release['id'], array_keys($savedReleases) ?? [])) {
+            if (is_array($release) && !in_array($release['id'] ?? 0, array_keys($savedReleases) ?? [])) {
                 $newRelease                       = new PackageRelease();
                 $newRelease->package_id           = $package->id;
                 $newRelease->release_id           = "" . $release['id'];
