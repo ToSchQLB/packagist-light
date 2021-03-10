@@ -17,9 +17,11 @@ use yii\helpers\ArrayHelper;
  * @property string           $repo_name
  * @property string           $readme
  * @property string           $readme_file
+ * @property int              $user_id
  *
  * @property GitSource        $gitSource
  * @property PackageRelease[] $releases
+ * @property User $user
  */
 class Package extends \yii\db\ActiveRecord
 {
@@ -111,6 +113,11 @@ class Package extends \yii\db\ActiveRecord
         return ArrayHelper::map(Package::find()
             ->addOrderBy(['name' => SORT_ASC])
             ->all(), $name, $value);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
 }

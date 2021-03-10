@@ -12,6 +12,8 @@ use yii\helpers\ArrayHelper;
  * @property int $id
  * @property string $name
  * @property string $baseUrl
+ *
+ * @property UserGitSourceToken $tookens
  */
 class GitSource extends \yii\db\ActiveRecord
 {
@@ -62,6 +64,11 @@ class GitSource extends \yii\db\ActiveRecord
         return ArrayHelper::map(GitSource::find()
         ->addOrderBy(['name'=>SORT_ASC])
         ->all(),'id','name');
+    }
+
+    public function getTookens()
+    {
+        return $this->hasMany(UserGitSourceToken::class,['git_source_id' => 'id']);
     }
 
 
