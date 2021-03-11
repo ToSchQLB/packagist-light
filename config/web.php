@@ -1,14 +1,17 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+use jki\user\forms\LoginForm;
+use jki\user\forms\RegistrationForm;
+
+$params      = require __DIR__ . '/params.php';
+$db          = require __DIR__ . '/db.php';
 $ldapDomains = require __DIR__ . '/ladp-domains.php';
 
 $config = [
     'id' => 'basic',
     'name' => 'JKI Packagist',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'queue'],
+    'bootstrap' => ['log', 'queue', 'debug'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -86,6 +89,11 @@ $config = [
     ],
     'modules'    => [
         'user'          => \jki\user\ModuleRegister::config([
+            'classMap' => [
+                'LoginForm'        => LoginForm::class,
+                'RegistrationForm' => RegistrationForm::class,
+                'User' => app\models\User::class,
+            ]
         ]),
     ],
     'params' => $params,

@@ -7,4 +7,5 @@ return [
     'senderName'         => 'Example.com mailer',
     'proxy'              => $proxy,
     'auto_user_creation' => true,
+    'scriptUrl'          => 'http://localhost/packagist-light/web/'
 ];

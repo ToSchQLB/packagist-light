@@ -9,6 +9,7 @@ use app\models\PackageRelease;
 use app\models\UserGitSourceToken;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 class WorkerController extends Controller
 {
@@ -55,6 +56,7 @@ class WorkerController extends Controller
      */
     public static function updatePackageReleases($package): void
     {
+        \Yii::$app->urlManager->scriptUrl = \Yii::$app->params['scriptUrl'];
         $savedReleases = ArrayHelper::index($package->releases, 'release_id');
 
         $suffix = "";
@@ -100,14 +102,17 @@ class WorkerController extends Controller
                 $composerJson['version'] = $newRelease->version;
 
                 if ($package->private === 1) {
+                    $zipDownloadUrl = $apiBaseUrl .
+                        $package->repo_user . '/' .
+                        $package->repo_name . '/' .
+                        'archive/' .
+                        $newRelease->version . '.zip?' .
+                        $suffix;
+                    $newRelease->zip_url = $zipDownloadUrl;
+                    $newRelease->save();
                     $composerJson['dist'] = [
                         'type' => 'zip',
-                        'url'  => $apiBaseUrl .
-                            $package->repo_user . '/' .
-                            $package->repo_name . '/' .
-                            'archive/' .
-                            $newRelease->version . '.zip?' .
-                            $suffix
+                        'url'  => Url::to(['download/private-release', 'id' => $newRelease->id]),
                     ];
                 } else {
                     $composerJson['dist'] = [
@@ -133,7 +138,7 @@ class WorkerController extends Controller
      *
      * @return bool|string
      */
-    private static function curl(string $releasesUrl)
+    public static function curl(string $releasesUrl)
     {
         $ch = curl_init();
 
